@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Disclosure Rings",
+      "hasCanvas": false,
+      "bodyTextLen": 2854,
+      "bodyTextHash": "5ac78e62ddf8f57b09c65f99de6a9195405778068e159162de8b1fee7b4fcf0a",
+      "bodyTextPrefix": "GREAT HOUSE FARM · TŶ MAWR · LLANDOUGH Disclosure rings Outside ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Disclosure Rings",
+      "hasCanvas": false,
+      "bodyTextLen": 2686,
+      "bodyTextHash": "f5244a5a6f510f84732e40183bd73b29d43cf2a679a253de0b5443c0eceae1b2",
+      "bodyTextPrefix": "GREAT HOUSE FARM · TŶ MAWR · LLANDOUGH Disclosure rings Outside ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}

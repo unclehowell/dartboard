@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Disclosure Rings</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: #14110e;
+    }
+    svg { display: block; }
+    .kicker {
+      font-family: "Liberation Sans", "DejaVu Sans", sans-serif;
+      font-size: 15px;
+      letter-spacing: 0.38em;
+      fill: #c4a574;
+    }
+    .title {
+      font-family: "Liberation Serif", "FreeSerif", serif;
+      font-size: 46px;
+      letter-spacing: 0.01em;
+      fill: #f3efe6;
+    }
+  </style>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+    <defs>
+      <radialGradient id="wash" cx="50%" cy="42%" r="58%">
+        <stop offset="0%" stop-color="#2a231b" />
+        <stop offset="55%" stop-color="#1a1612" />
+        <stop offset="100%" stop-color="#14110e" />
+      </radialGradient>
+      <filter id="grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="4" stitchTiles="stitch" />
+        <feColorMatrix type="luminanceToAlpha" />
+        <feComponentTransfer>
+          <feFuncA type="linear" slope="0.55" />
+        </feComponentTransfer>
+      </filter>
+    </defs>
+
+    <rect width="1200" height="630" fill="#14110e" />
+    <rect width="1200" height="630" fill="url(#wash)" />
+    <rect width="1200" height="630" fill="#c4a574" filter="url(#grain)" opacity="0.07" />
+
+    <rect x="28" y="28" width="1144" height="574" fill="none" stroke="#c4a574" stroke-width="1.25" opacity="0.72" />
+    <rect x="36" y="36" width="1128" height="558" fill="none" stroke="#c4a574" stroke-width="0.6" opacity="0.4" />
+
+    <!-- corner registration -->
+    <path d="M52 70 V52 H70" fill="none" stroke="#c4a574" stroke-width="1.25" />
+    <path d="M1148 70 V52 H1130" fill="none" stroke="#c4a574" stroke-width="1.25" />
+    <path d="M52 560 V578 H70" fill="none" stroke="#c4a574" stroke-width="1.25" />
+    <path d="M1148 560 V578 H1130" fill="none" stroke="#c4a574" stroke-width="1.25" />
+
+    <!-- instrument bezel + ticks (drawn by script below into #dial) -->
+    <g id="dial"></g>
+
+    <text class="kicker" x="600" y="500" text-anchor="middle">TŶ MAWR  ·  LLANDOUGH</text>
+    <line x1="552" y1="516" x2="648" y2="516" stroke="#c4a574" stroke-width="1" />
+    <text class="title" x="600" y="562" text-anchor="middle">Disclosure Rings</text>
+  </svg>
+  <script>
+    const cx = 600;
+    const cy = 252;
+    const CREAM = "#f3efe6";
+    const GREEN = "#2c7a4b";
+    const ORANGE = "#c4622d";
+    const RED = "#c23b32";
+    const GREY = "#7e796f";
+    const BRASS = "#c4a574";
+
+    function pt(r, deg) {
+      const a = ((deg - 90) * Math.PI) / 180;
+      return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+    }
+
+    function annular(rInner, rOuter, deg0, deg1) {
+      let a0 = deg0;
+      let a1 = deg1;
+      if (a1 <= a0) a1 += 360;
+      const sweep = a1 - a0;
+      const large = sweep > 180 ? 1 : 0;
+      const [x0, y0] = pt(rOuter, a0);
+      const [x1, y1] = pt(rOuter, a1);
+      const [x2, y2] = pt(rInner, a1);
+      const [x3, y3] = pt(rInner, a0);
+      const f = (n) => n.toFixed(2);
+      return `M ${f(x0)} ${f(y0)} A ${rOuter} ${rOuter} 0 ${large} 1 ${f(x1)} ${f(y1)} L ${f(x2)} ${f(y2)} A ${rInner} ${rInner} 0 ${large} 0 ${f(x3)} ${f(y3)} Z`;
+    }
+
+    function ring(rInner, rOuter) {
+      const mid = (rInner + rOuter) / 2;
+      const w = rOuter - rInner;
+      return `<circle cx="${cx}" cy="${cy}" r="${mid}" fill="none" stroke="${CREAM}" stroke-width="${w}" />`;
+    }
+
+    function slice(rInner, rOuter, deg0, deg1, color) {
+      const inset = 3.2;
+      const gap = 1.15;
+      return `<path d="${annular(rInner + inset, rOuter - inset, deg0 + gap, deg1 - gap)}" fill="${color}" />`;
+    }
+
+    const ticks = [];
+    for (let i = 0; i < 72; i++) {
+      const deg = i * 5;
+      const major = i % 6 === 0;
+      const cardinal = i % 18 === 0;
+      const r0 = cardinal ? 180 : major ? 186 : 190;
+      const r1 = 200;
+      const [x0, y0] = pt(r0, deg);
+      const [x1, y1] = pt(r1, deg);
+      const sw = cardinal ? 1.6 : major ? 1.15 : 0.7;
+      const op = cardinal ? 0.95 : major ? 0.72 : 0.38;
+      ticks.push(
+        `<line x1="${x0.toFixed(2)}" y1="${y0.toFixed(2)}" x2="${x1.toFixed(2)}" y2="${y1.toFixed(2)}" stroke="${BRASS}" stroke-width="${sw}" stroke-linecap="square" opacity="${op}" />`,
+      );
+    }
+
+    const parts = [];
+    parts.push(`<circle cx="${cx}" cy="${cy}" r="206" fill="none" stroke="${BRASS}" stroke-width="0.8" opacity="0.35" />`);
+    parts.push(ticks.join(""));
+    parts.push(`<circle cx="${cx}" cy="${cy}" r="174" fill="none" stroke="${BRASS}" stroke-width="1.15" opacity="0.8" />`);
+
+    // four cream paper rings, ink showing in the grooves
+    const rings = [
+      [142, 172],
+      [100, 130],
+      [64, 90],
+      [34, 54],
+    ];
+    for (const [ri, ro] of rings) parts.push(ring(ri, ro));
+
+    // a few inlaid slices: green, orange, red, grey
+    parts.push(slice(142, 172, 198, 246, GREEN));
+    parts.push(slice(142, 172, 250, 278, RED));
+    parts.push(slice(142, 172, 300, 342, GREY));
+
+    parts.push(slice(100, 130, 18, 86, ORANGE));
+    parts.push(slice(100, 130, 150, 176, GREEN));
+
+    parts.push(slice(64, 90, 64, 108, GREY));
+    parts.push(slice(64, 90, 206, 228, RED));
+
+    parts.push(slice(34, 54, 248, 312, GREEN));
+    parts.push(slice(34, 54, 332, 356, ORANGE));
+
+    parts.push(`<circle cx="${cx}" cy="${cy}" r="22" fill="${CREAM}" />`);
+    parts.push(`<circle cx="${cx}" cy="${cy}" r="22" fill="none" stroke="${BRASS}" stroke-width="1.35" />`);
+    parts.push(`<circle cx="${cx}" cy="${cy}" r="3.6" fill="${BRASS}" />`);
+
+    document.getElementById("dial").innerHTML = parts.join("");
+  </script>
+</body>
+</html>
