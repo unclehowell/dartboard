@@ -48,6 +48,23 @@ export function RingWheel({ selection, onSelect, filter }: Props) {
   const drag = useRef<{ x: number; y: number; vx: number; vy: number } | null>(null);
   const suppressClick = useRef(false);
   const titleId = useId();
+  const [pulseKey, setPulseKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    let timer: number;
+    const schedule = () => {
+      const delay = 4000 + Math.random() * 9000;
+      timer = window.setTimeout(() => {
+        const party = parties[Math.floor(Math.random() * parties.length)];
+        const ring = rings[Math.floor(Math.random() * rings.length)];
+        setPulseKey(`${party.id}-${ring.id}`);
+        window.setTimeout(() => setPulseKey(null), 1700);
+        schedule();
+      }, delay);
+    };
+    schedule();
+    return () => window.clearTimeout(timer);
+  }, []);
   const thickness = (OUTER - INNER) / rings.length;
   const slice = (Math.PI * 2) / parties.length;
 
@@ -168,7 +185,7 @@ export function RingWheel({ selection, onSelect, filter }: Props) {
                 stroke={selected ? "var(--color-brass)" : "var(--color-bg)"}
                 strokeWidth={selected ? 3 : 0.6}
                 data-slice=""
-                className="cursor-pointer outline-none transition-opacity duration-150"
+                className={`cursor-pointer outline-none transition-opacity duration-150 ${pulseKey === `${party.id}-${ring.id}` ? "slice-pulse" : ""}`}
                 tabIndex={0}
                 role="button"
                 aria-pressed={selected}
