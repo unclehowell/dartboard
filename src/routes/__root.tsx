@@ -3,7 +3,7 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "Disclosure Rings";
+const APP_NAME = "op ask nicely";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -14,7 +14,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Concentric rings of every FOI, review and complaint on the Great House Farm case.",
+          "op ask nicely — concentric rings of every FOI, review and complaint on the Great House Farm case.",
       },
       { name: "theme-color", content: "#14110e" },
     ],
