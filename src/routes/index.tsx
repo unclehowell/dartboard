@@ -51,7 +51,7 @@ function Home() {
             Great House Farm · Tŷ Mawr · Llandough
           </p>
           <h1 className="mt-1 font-serif text-3xl leading-tight text-fg md:text-4xl">
-            Disclosure rings
+            op ask nicely
           </h1>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
             Outside is the first enquiry. Each ring inward is the next step that has to be
@@ -155,7 +155,7 @@ function Home() {
                   rel="noreferrer"
                   className="mt-3 inline-flex items-center gap-1.5 text-sm text-brass-ink underline decoration-brass underline-offset-4"
                 >
-                  Open the thread in Gmail
+                  Open the thread on the wiki
                   <ExternalLink className="size-3.5" aria-hidden />
                 </a>
               )}
