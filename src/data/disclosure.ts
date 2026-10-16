@@ -120,8 +120,8 @@ export const statusMeta: Record<
     swatch: "var(--color-suspicious)",
   },
   disclosed: {
-    label: "Disclosed — now public",
-    hint: "A previously inaccessible or unlocated item is now publicly accessible. The release itself does not establish who knew earlier, why it was unavailable, or deliberate concealment.",
+    label: "Previously concealed → disclosed",
+    hint: "Black records the family's position that the material was concealed over the preceding 38 years and is now brought into public view. The disclosure chronology is recorded; who was responsible, why it was unavailable, and whether a particular actor intentionally concealed it remain matters for evidence.",
     swatch: "var(--color-disclosed)",
   },
   destroyed: {
