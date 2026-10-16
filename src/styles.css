@@ -17,6 +17,9 @@
   --color-nuisance: #3e4348;
   --color-closed: #e07a2f;
   --color-suspicious: #c23b32;
+  --color-disclosed: #050505;
+  --color-destroyed: #765035;
+  --color-missing: #897200;
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Fraunces", "Iowan Old Style", Palatino, Georgia, serif;
   --radius-card: 1.25rem;
