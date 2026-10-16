@@ -10,7 +10,7 @@ const OUT = path.join(__dirname, "..", "src", "data", "disclosure.ts");
 const text = fs.readFileSync(OUT, "utf8");
 const required = [
   ["typed status model", /export type Status =/],
-  ["disclosure status", /label: "Disclosed — now public"/],
+  ["disclosure status", /label: "Previously concealed → disclosed"/],
   ["documented destruction status", /label: "Destroyed"/],
   ["missing record status", /label: "Missing \/ not located"/],
   ["National Library footage release", /id: "nlw-archive-release"/],
