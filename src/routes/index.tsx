@@ -104,8 +104,8 @@ function Home() {
       </div>
 
       <p className="max-w-4xl text-xs leading-relaxed text-muted">
-        Black = newly public disclosure; brown = documented destruction; dark ochre = missing / not located.
-        “Disclosed” records availability now, not by itself proof of motive or intentional concealment.
+        Black = the family's disclosure of previously concealed material now brought into public view; brown = documented destruction; dark ochre = missing / not located.
+        Black records the family's 38-year concealment position and the fact of disclosure; it does not by itself identify who concealed the material or prove a particular actor's intent.
         Use “destroyed” only when the evidence supports permanent loss; an unsuccessful search belongs under “missing”.
       </p>
 
