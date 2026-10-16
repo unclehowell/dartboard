@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
   const [selection, setSelection] = useState<Selection | null>({
-    partyId: "llandough",
+    partyId: "nlw-archive-release",
     ringId: "reply",
   });
   const [filter, setFilter] = useState<Status | null>(null);
@@ -36,6 +36,9 @@ function Home() {
       nuisance: 0,
       closed: 0,
       suspicious: 0,
+      disclosed: 0,
+      destroyed: 0,
+      missing: 0,
     };
     for (const party of parties) {
       for (const ring of rings) tally[resolveCell(party, ring).status] += 1;
@@ -80,6 +83,7 @@ function Home() {
               key={status}
               type="button"
               aria-pressed={on}
+              title={meta.hint}
               onClick={() => setFilter(on ? null : status)}
               className={`flex items-center gap-2 rounded-full border px-3 py-2 text-sm ${
                 on
@@ -88,7 +92,7 @@ function Home() {
               }`}
             >
               <span
-                className="size-3 rounded-full"
+                className="size-3 rounded-full border border-white/60"
                 style={{ background: meta.swatch }}
                 aria-hidden
               />
@@ -98,6 +102,12 @@ function Home() {
           );
         })}
       </div>
+
+      <p className="max-w-4xl text-xs leading-relaxed text-muted">
+        Black = newly public disclosure; brown = documented destruction; dark ochre = missing / not located.
+        “Disclosed” records availability now, not by itself proof of motive or intentional concealment.
+        Use “destroyed” only when the evidence supports permanent loss; an unsuccessful search belongs under “missing”.
+      </p>
 
       <div className="grid min-h-0 flex-1 gap-4 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-stretch">
         <section className="aspect-square w-full" aria-label="Ring chart">
